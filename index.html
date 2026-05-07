@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grocery Billing System</title>
-   <link rel="shortcut icon" href="./photo/logo.jpeg" type="image/x-icon">
+  <link rel="shortcut icon" href="./photo/logo.jpeg" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
@@ -73,7 +73,21 @@
 
     </div>
 
-    <!-- PRINT BUTTON -->
+    
+    <!-- PAYMENT
+    <div class="bg-white p-4 mt-5">
+
+      <select id="method" class="border p-2 w-full">
+        <option value="sslcommerz">SSLCommerz</option>
+        <option value="bkash">bKash</option>
+        <option value="nagad">Nagad</option>
+      </select>
+
+      <button onclick="pay()" class="bg-purple-600 text-white p-2 w-full mt-3">
+        Pay Now
+      </button>
+
+    </div> -->
     <button onclick="printBill()" class="no-print w-full mt-4 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
       Print Bill
     </button>
@@ -81,10 +95,12 @@
   </div>
 
   <script src="./script/active.js"></script>
+  <script src="./script/script.js"></script>
   <footer>
     <p class="text-center text-gray-500 text-sm grid grid-cols-1 mt-5 mb-5">
       &copy; 2026 Grocery Shop. <br> Team leader by <br> Md Mobasher Hosen Mithu(872191),<br> Team member-1 by Md Maruf
-      islam(872177), <br> Team member-2 by Md.Nahid alom(872169), <br> others Team member: 872175,872176,872165,872166,872206 &
+      islam(872177), <br> Team member-2 by Md.Nahid alom(872169), <br> others Team member:
+      872175,872176,872165,872166,872206 &
       887369 . <br> All rights reserved.
     </p>
   </footer>
