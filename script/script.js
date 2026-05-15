@@ -3,7 +3,7 @@ let isAdmin = false;
 
 // ADMIN LOGIN
 const ADMIN_EMAIL = "admin@gmail.com";
-const ADMIN_PASSWORD = "admin123";
+const ADMIN_PASSWORD = "mithuajs721";
 
 // DEFAULT PRODUCTS
 let products = [
