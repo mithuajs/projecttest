@@ -1,109 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grocery Billing System</title>
-  <link rel="shortcut icon" href="./photo/logo.jpeg" type="image/x-icon">
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-  <style>
-    @media print {
-      body {
-        background: white;
-      }
-
-      .no-print {
-        display: none !important;
-      }
-
-      table {
-        width: 100%;
-      }
-    }
-  </style>
 </head>
 
-<body class="bg-gray-100 grid grid-cols-1 min-h-screen">
+<body class="bg-slate-100 min-h-screen">
 
-  <div class="max-w-3xl mx-auto p-4">
+  <!-- NAVBAR -->
+  <div class="navbar bg-green-600 text-white shadow-lg px-5">
+    <div class="flex-1">
+      <a class="text-xl font-bold">
+        Grocery Billing System
+      </a>
+    </div>
 
-    <h1 class="text-2xl font-bold text-center text-green-600 mb-5">
-      Grocery Shop Billing System
-    </h1>
+    <div class="flex-none gap-3">
 
-    <!-- INPUT SECTION -->
-    <div class="no-print bg-white p-4 rounded shadow space-y-3">
+      <button id="adminPanelBtn" class="btn btn-warning hidden">
+        Admin Panel
+      </button>
 
-      <input id="product" type="text" placeholder="Product Name" class="w-full border p-2 rounded">
-
-      <input id="qty" type="number" placeholder="Quantity" class="w-full border p-2 rounded">
-
-      <input id="price" type="number" placeholder="Price" class="w-full border p-2 rounded">
-
-      <button onclick="addProduct()" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
-        Add Product
+      <button onclick="logoutUser()" class="btn btn-error btn-sm hidden" id="logoutBtn">
+        Logout
       </button>
 
     </div>
+  </div>
 
-    <!-- TABLE -->
-    <div class="bg-white mt-5 p-4 rounded shadow">
+  <!-- LOGIN SECTION -->
+  <div id="loginSection" class="flex justify-center items-center min-h-screen p-5">
 
-      <table class="w-full text-center border">
+    <div class="card bg-base-100 w-full max-w-md shadow-2xl">
 
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="p-2">Product</th>
-            <th class="p-2">Qty</th>
-            <th class="p-2">Price</th>
-            <th class="p-2">Total</th>
-            <th class="p-2 no-print">Action</th>
-          </tr>
-        </thead>
+      <div class="card-body">
 
-        <tbody id="list"></tbody>
-      </table>
+        <h2 class="text-3xl font-bold text-center text-green-600">
+          Login
+        </h2>
 
-      <h2 class="text-right mt-4 font-bold">
-        Grand Total: <span id="grandTotal">0</span> BDT
+        <input id="loginEmail" type="text" placeholder="Phone / Email"
+          class="input input-bordered w-full" />
+
+        <input id="loginPassword" type="password" placeholder="Password"
+          class="input input-bordered w-full" />
+
+        <button onclick="loginUser()" class="btn btn-success w-full">
+          Login
+        </button>
+
+        <p class="text-center">
+          Don't have account?
+          <span onclick="showRegister()"
+            class="text-green-600 font-bold cursor-pointer">
+            Register
+          </span>
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTER SECTION -->
+  <div id="registerSection"
+    class="hidden flex justify-center items-center min-h-screen p-5">
+
+    <div class="card bg-base-100 w-full max-w-md shadow-2xl">
+
+      <div class="card-body">
+
+        <h2 class="text-3xl font-bold text-center text-blue-600">
+          Register
+        </h2>
+
+        <input id="regName" type="text" placeholder="Full Name"
+          class="input input-bordered w-full" />
+
+        <input id="regPhone" type="text" placeholder="Phone Number"
+          class="input input-bordered w-full" />
+
+        <input id="regEmail" type="email" placeholder="Email"
+          class="input input-bordered w-full" />
+
+        <input id="regPassword" type="password"
+          placeholder="New Password"
+          class="input input-bordered w-full" />
+
+        <input id="regConfirmPassword" type="password"
+          placeholder="Confirm Password"
+          class="input input-bordered w-full" />
+
+        <button onclick="registerUser()" class="btn btn-primary w-full">
+          Register
+        </button>
+
+        <p class="text-center">
+          Already have account?
+          <span onclick="showLogin()"
+            class="text-blue-600 font-bold cursor-pointer">
+            Login
+          </span>
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="hidden p-5">
+
+    <!-- ADMIN ADD PRODUCT -->
+    <div id="adminSection" class="hidden mb-5">
+
+      <div class="card bg-white shadow-xl p-5">
+
+        <h2 class="text-2xl font-bold mb-4 text-center">
+          Add Product Card
+        </h2>
+
+        <div class="grid md:grid-cols-4 gap-3">
+
+          <input id="adminProductName" type="text"
+            placeholder="Product Name"
+            class="input input-bordered" />
+
+          <input id="adminPrice" type="number"
+            placeholder="Price"
+            class="input input-bordered" />
+
+          <input id="adminDiscount" type="number"
+            placeholder="Discount Price"
+            class="input input-bordered" />
+
+          <input id="adminImage" type="text"
+            placeholder="Image URL"
+            class="input input-bordered" />
+
+        </div>
+
+        <button onclick="addAdminProduct()"
+          class="btn btn-success mt-4 w-full">
+          Add Product Card
+        </button>
+
+      </div>
+    </div>
+
+    <!-- PRODUCT CARD -->
+    <div id="productContainer"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+    </div>
+
+    <!-- BILL TABLE -->
+    <div class="bg-white shadow-xl rounded-xl p-5 mt-10">
+
+      <h2 class="text-2xl font-bold mb-4">
+        Billing Table
       </h2>
 
-    </div>
+      <div class="overflow-x-auto">
 
-    
-    <!-- PAYMENT
-    <div class="bg-white p-4 mt-5">
+        <table class="table table-zebra w-full">
 
-      <select id="method" class="border p-2 w-full">
-        <option value="sslcommerz">SSLCommerz</option>
-        <option value="bkash">bKash</option>
-        <option value="nagad">Nagad</option>
-      </select>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
 
-      <button onclick="pay()" class="bg-purple-600 text-white p-2 w-full mt-3">
-        Pay Now
+          <tbody id="list"></tbody>
+
+        </table>
+
+      </div>
+
+      <h2 class="text-right text-2xl font-bold mt-5">
+        Grand Total:
+        <span id="grandTotal">0</span> BDT
+      </h2>
+
+      <button onclick="window.print()"
+        class="btn btn-primary mt-4 w-full">
+        Print Bill
       </button>
 
-    </div> -->
-    <button onclick="printBill()" class="no-print w-full mt-4 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-      Print Bill
-    </button>
+    </div>
 
   </div>
 
-  <script src="./script/active.js"></script>
+  <script type="module" src="./script/firebase.js"></script>
   <script src="./script/script.js"></script>
-  <footer>
-    <p class="text-center text-gray-500 text-sm grid grid-cols-1 mt-5 mb-5">
-      &copy; 2026 Grocery Shop. <br> Team leader by <br> Md Mobasher Hosen Mithu(872191),<br> Team member-1 by Md Maruf
-      islam(872177), <br> Team member-2 by Md.Nahid alom(872169), <br> others Team member:
-      872175,872176,872165,872166,872206 &
-      887369 . <br> All rights reserved.
-    </p>
-  </footer>
 
 </body>
 

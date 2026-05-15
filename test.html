@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grocery Billing System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-slate-100 min-h-screen">
+
+    <!-- NAVBAR -->
+    <div class="navbar bg-green-600 text-white px-5">
+        <div class="flex-1 font-bold text-xl">Grocery Billing System</div>
+
+        <div class="flex gap-2">
+            <button id="logoutBtn" onclick="logoutUser()" class="btn btn-error btn-sm hidden">
+                Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="loginSection" class="flex justify-center items-center min-h-screen">
+        <div class="card bg-white p-5 w-full max-w-md shadow-xl">
+            <h2 class="text-2xl font-bold text-center">Login</h2>
+
+            <input id="loginEmail" class="input input-bordered mt-3 w-full" placeholder="Email">
+            <input id="loginPassword" type="password" class="input input-bordered mt-3 w-full" placeholder="Password">
+
+            <button onclick="loginUser()" class="btn btn-success mt-4 w-full">Login</button>
+
+            <p class="text-center mt-2 text-blue-600 cursor-pointer" onclick="showRegister()">
+                Register
+            </p>
+        </div>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="registerSection" class="hidden flex justify-center items-center min-h-screen">
+        <div class="card bg-white p-5 w-full max-w-md shadow-xl">
+
+            <h2 class="text-2xl font-bold text-center">Register</h2>
+
+            <input id="regName" class="input input-bordered mt-2 w-full" placeholder="Name">
+            <input id="regPhone" class="input input-bordered mt-2 w-full" placeholder="Phone">
+            <input id="regEmail" class="input input-bordered mt-2 w-full" placeholder="Email">
+            <input id="regPassword" type="password" class="input input-bordered mt-2 w-full" placeholder="Password">
+            <input id="regConfirmPassword" type="password" class="input input-bordered mt-2 w-full"
+                placeholder="Confirm">
+
+            <button onclick="registerUser()" class="btn btn-primary mt-4 w-full">Register</button>
+
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="hidden p-5">
+
+        <!-- ADMIN PRODUCT ADD -->
+        <div id="adminSection" class="hidden bg-white p-5 rounded-xl shadow">
+            <h2 class="font-bold text-xl mb-3">Admin Add Product</h2>
+
+            <input id="adminProductName" class="input input-bordered w-full mb-2" placeholder="Product">
+            <input id="adminPrice" class="input input-bordered w-full mb-2" placeholder="Price">
+            <input id="adminDiscount" class="input input-bordered w-full mb-2" placeholder="Discount">
+            <input id="adminImage" class="input input-bordered w-full mb-2" placeholder="Image URL">
+
+            <button onclick="addAdminProduct()" class="btn btn-success w-full">Add</button>
+        </div>
+
+        <!-- PRODUCT LIST -->
+        <div id="productContainer" class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5"></div>
+
+        <!-- BILL -->
+        <div class="bg-white p-5 mt-10 shadow-xl">
+            <h2 class="font-bold text-xl">Billing Table</h2>
+
+            <table class="table w-full mt-3">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="list"></tbody>
+            </table>
+
+            <h2 class="text-right font-bold text-xl mt-3">
+                Grand Total: <span id="grandTotal">0</span>
+            </h2>
+        </div>
+
+        <!-- ADMIN ORDERS DASHBOARD -->
+        <div id="adminDashboard" class="hidden bg-white p-5 mt-10 shadow">
+            <h2 class="font-bold text-xl">All Orders</h2>
+
+            <table class="table w-full mt-3">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="adminOrders"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script type="module" src="./testfirebase.js"></script>
+    <script src="./testsc.js"></script>
+
+</body>
+
+</html>
