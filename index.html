@@ -8,12 +8,69 @@
 
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    .product-card {
+      transition: all 0.35s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, .15);
+    }
+
+    .product-card img {
+      transition: transform .4s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.08);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade {
+      animation: fadeUp .6s ease;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      #printArea,
+      #printArea * {
+        visibility: visible;
+      }
+
+      #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
 </head>
 
 <body class="bg-slate-100 min-h-screen">
 
   <!-- NAVBAR -->
-  <div class="navbar bg-green-600 text-white shadow-lg px-5">
+  <div class="navbar bg-gradient-to-r from-green-600 to-emerald-500 text-white shadow-xl px-5 sticky top-0 z-50">
     <div class="flex-1">
       <a class="text-xl font-bold">
         Grocery Billing System
@@ -44,11 +101,9 @@
           Login
         </h2>
 
-        <input id="loginEmail" type="text" placeholder="Phone / Email"
-          class="input input-bordered w-full" />
+        <input id="loginEmail" type="text" placeholder="Phone / Email" class="input input-bordered w-full" />
 
-        <input id="loginPassword" type="password" placeholder="Password"
-          class="input input-bordered w-full" />
+        <input id="loginPassword" type="password" placeholder="Password" class="input input-bordered w-full" />
 
         <button onclick="loginUser()" class="btn btn-success w-full">
           Login
@@ -56,8 +111,7 @@
 
         <p class="text-center">
           Don't have account?
-          <span onclick="showRegister()"
-            class="text-green-600 font-bold cursor-pointer">
+          <span onclick="showRegister()" class="text-green-600 font-bold cursor-pointer">
             Register
           </span>
         </p>
@@ -67,8 +121,7 @@
   </div>
 
   <!-- REGISTER SECTION -->
-  <div id="registerSection"
-    class="hidden flex justify-center items-center min-h-screen p-5">
+  <div id="registerSection" class="hidden flex justify-center items-center min-h-screen p-5">
 
     <div class="card bg-base-100 w-full max-w-md shadow-2xl">
 
@@ -78,21 +131,15 @@
           Register
         </h2>
 
-        <input id="regName" type="text" placeholder="Full Name"
-          class="input input-bordered w-full" />
+        <input id="regName" type="text" placeholder="Full Name" class="input input-bordered w-full" />
 
-        <input id="regPhone" type="text" placeholder="Phone Number"
-          class="input input-bordered w-full" />
+        <input id="regPhone" type="text" placeholder="Phone Number" class="input input-bordered w-full" />
 
-        <input id="regEmail" type="email" placeholder="Email"
-          class="input input-bordered w-full" />
+        <input id="regEmail" type="email" placeholder="Email" class="input input-bordered w-full" />
 
-        <input id="regPassword" type="password"
-          placeholder="New Password"
-          class="input input-bordered w-full" />
+        <input id="regPassword" type="password" placeholder="New Password" class="input input-bordered w-full" />
 
-        <input id="regConfirmPassword" type="password"
-          placeholder="Confirm Password"
+        <input id="regConfirmPassword" type="password" placeholder="Confirm Password"
           class="input input-bordered w-full" />
 
         <button onclick="registerUser()" class="btn btn-primary w-full">
@@ -101,8 +148,7 @@
 
         <p class="text-center">
           Already have account?
-          <span onclick="showLogin()"
-            class="text-blue-600 font-bold cursor-pointer">
+          <span onclick="showLogin()" class="text-blue-600 font-bold cursor-pointer">
             Login
           </span>
         </p>
@@ -112,7 +158,7 @@
   </div>
 
   <!-- DASHBOARD -->
-  <div id="dashboard" class="hidden p-5">
+  <div id="dashboard" class="hidden p-5 animate-fade">
 
     <!-- ADMIN ADD PRODUCT -->
     <div id="adminSection" class="hidden mb-5">
@@ -125,26 +171,17 @@
 
         <div class="grid md:grid-cols-4 gap-3">
 
-          <input id="adminProductName" type="text"
-            placeholder="Product Name"
-            class="input input-bordered" />
+          <input id="adminProductName" type="text" placeholder="Product Name" class="input input-bordered" />
 
-          <input id="adminPrice" type="number"
-            placeholder="Price"
-            class="input input-bordered" />
+          <input id="adminPrice" type="number" placeholder="Price" class="input input-bordered" />
 
-          <input id="adminDiscount" type="number"
-            placeholder="Discount Price"
-            class="input input-bordered" />
+          <input id="adminDiscount" type="number" placeholder="Discount Price" class="input input-bordered" />
 
-          <input id="adminImage" type="text"
-            placeholder="Image URL"
-            class="input input-bordered" />
+          <input id="adminImage" type="text" placeholder="Image URL" class="input input-bordered" />
 
         </div>
 
-        <button onclick="addAdminProduct()"
-          class="btn btn-success mt-4 w-full">
+        <button onclick="addAdminProduct()" class="btn btn-success mt-4 w-full">
           Add Product Card
         </button>
 
@@ -152,13 +189,12 @@
     </div>
 
     <!-- PRODUCT CARD -->
-    <div id="productContainer"
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div id="productContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
     </div>
 
     <!-- BILL TABLE -->
-    <div class="bg-white shadow-xl rounded-xl p-5 mt-10">
+    <div id="printArea" class="bg-white shadow-xl rounded-xl p-5 mt-10">
 
       <h2 class="text-2xl font-bold mb-4">
         Billing Table
@@ -174,7 +210,7 @@
               <th>Qty</th>
               <th>Price</th>
               <th>Total</th>
-              <th>Action</th>
+              <th class="no-print">Action</th>
             </tr>
           </thead>
 
@@ -189,8 +225,7 @@
         <span id="grandTotal">0</span> BDT
       </h2>
 
-      <button onclick="window.print()"
-        class="btn btn-primary mt-4 w-full">
+      <button onclick="window.print()" class="btn btn-primary mt-4 w-full">
         Print Bill
       </button>
 
